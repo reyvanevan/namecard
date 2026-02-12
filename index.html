@@ -13,6 +13,8 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&family=Syncopate:wght@400;700&display=swap"
         rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- QR Code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 
     <!-- Styling -->
     <style>
@@ -637,7 +639,7 @@
                                                     class="fas fa-location-dot"
                                                     style="color: var(--curr-accent, #d4af37); font-size: 7px;"></i>
                                             </div>
-                                            <span>Jakarta, Indonesia</span>
+                                            <span>Cijeruk, Indonesia</span>
                                         </div>
                                     </div>
                                 </div>
@@ -653,20 +655,45 @@
                             <div class="card-watermark" id="watermarkBack"
                                 style="width: 300px; height: 300px; right: -50px; bottom: -50px; opacity: 0.03;"></div>
 
-                            <div class="card-logo-container" id="cardLogoBack"
-                                style="width: 60px; height: 60px; margin-bottom: 18px;">
-                                <div class="logo-ripple-svg"
-                                    style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
-                                    <div class="outer" style="border-width: 2px;"></div>
-                                    <div class="inner" style="border-width: 3px;"></div>
-                                    <div class="core" style="width: 28%; height: 28%;"></div>
+                            <!-- Horizontal Split: Logo Left | QR Right -->
+                            <div
+                                style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; position: relative; z-index: 10; gap: 0;">
+
+                                <!-- LEFT: Logo + Brand -->
+                                <div
+                                    style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <div class="card-logo-container" id="cardLogoBack"
+                                        style="width: 50px; height: 50px; margin-bottom: 14px;">
+                                        <div class="logo-ripple-svg"
+                                            style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+                                            <div class="outer" style="border-width: 2px;"></div>
+                                            <div class="inner" style="border-width: 3px;"></div>
+                                            <div class="core" style="width: 28%; height: 28%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="card-brand-name"
+                                        style="font-size: 11px; letter-spacing: 4px; text-align: center; font-weight: 600; line-height: 1.5;">
+                                        ATLANTIC<br><span style="font-weight:300; color:var(--curr-accent, #d4af37)"
+                                            id="back-gate-text">GATE</span>
+                                    </div>
+                                </div>
+
+                                <!-- CENTER: Divider -->
+                                <div id="backDivider"
+                                    style="width: 1px; height: 55%; background: linear-gradient(to bottom, transparent, var(--curr-accent, #d4af37), transparent); opacity: 0.3;">
+                                </div>
+
+                                <!-- RIGHT: QR Code -->
+                                <div
+                                    style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <canvas id="qrCanvas"
+                                        style="width: 65px; height: 65px; border-radius: 4px;"></canvas>
+                                    <p
+                                        style="font-size: 5.5px; letter-spacing: 2px; color: #64748b; margin-top: 8px; font-weight: 400; text-transform: uppercase;">
+                                        SCAN TO CONNECT</p>
                                 </div>
                             </div>
-                            <div class="card-brand-name"
-                                style="font-size: 14px; letter-spacing: 5px; text-align: center; font-weight: 600;">
-                                ATLANTIC <span style="font-weight:300; color:var(--curr-accent, #d4af37)"
-                                    id="back-gate-text">GATE</span>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -842,6 +869,23 @@
                     btn.disabled = false;
                 });
         }
+
+        // QR Code Generation
+        function generateQR() {
+            const url = inputs.web.value || 'https://atlanticgate.com';
+            const qr = new QRious({
+                element: document.getElementById('qrCanvas'),
+                value: url.startsWith('http') ? url : 'https://' + url,
+                size: 260,
+                foreground: '#ffffff',
+                background: 'transparent',
+                level: 'M'
+            });
+        }
+
+        // Generate QR on load and on web input change
+        generateQR();
+        inputs.web.addEventListener('input', generateQR);
     </script>
 </body>
 
