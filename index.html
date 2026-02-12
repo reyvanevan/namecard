@@ -683,14 +683,13 @@
                                     style="width: 1px; height: 55%; background: linear-gradient(to bottom, transparent, var(--curr-accent, #d4af37), transparent); opacity: 0.3;">
                                 </div>
 
-                                <!-- RIGHT: QR Code -->
                                 <div
                                     style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                                     <canvas id="qrCanvas"
                                         style="width: 65px; height: 65px; border-radius: 4px;"></canvas>
-                                    <p
-                                        style="font-size: 5.5px; letter-spacing: 2px; color: #64748b; margin-top: 8px; font-weight: 400; text-transform: uppercase;">
-                                        SCAN TO CONNECT</p>
+                                    <p id="qrUrlLabel"
+                                        style="font-size: 5.5px; letter-spacing: 1.5px; color: #64748b; margin-top: 8px; font-weight: 400;">
+                                        atlanticgate.com</p>
                                 </div>
                             </div>
 
@@ -872,15 +871,20 @@
 
         // QR Code Generation
         function generateQR() {
-            const url = inputs.web.value || 'https://atlanticgate.com';
+            const rawUrl = inputs.web.value || 'https://atlanticgate.com';
+            const fullUrl = rawUrl.startsWith('http') ? rawUrl : 'https://' + rawUrl;
             const qr = new QRious({
                 element: document.getElementById('qrCanvas'),
-                value: url.startsWith('http') ? url : 'https://' + url,
+                value: fullUrl,
                 size: 260,
                 foreground: '#ffffff',
                 background: 'transparent',
                 level: 'M'
             });
+
+            // Update URL label (strip protocol and www.)
+            const cleanUrl = rawUrl.replace(/^https?:\/\//, '').replace(/^www\./, '');
+            document.getElementById('qrUrlLabel').textContent = cleanUrl;
         }
 
         // Generate QR on load and on web input change
