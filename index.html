@@ -124,7 +124,7 @@
         /* Logo Selector */
         .selector-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
         }
 
@@ -371,17 +371,7 @@
             position: absolute;
         }
 
-        .logo-gate-svg svg {
-            width: 100%;
-            height: 100%;
-            fill: url(#silverGradient);
-        }
-
         /* --- THEMES --- */
-        .theme-gate .card-brand-name {
-            font-family: 'Orbitron', sans-serif;
-        }
-
         .theme-portal .card-brand-name {
             font-family: 'Syncopate', sans-serif;
         }
@@ -489,10 +479,6 @@
                     <button class="select-btn" data-type="portal">
                         <i class="fa-solid fa-vector-square"></i>
                         <span>Portal</span>
-                    </button>
-                    <button class="select-btn" data-type="gate">
-                        <i class="fa-solid fa-play" style="transform: rotate(-90deg);"></i>
-                        <span>Gate</span>
                     </button>
                 </div>
             </div>
@@ -636,19 +622,6 @@
                 watermark.style.transform = 'rotate(45deg)';
                 watermark.style.bottom = '-70px'; watermark.style.right = '-70px';
                 watermark.style.borderColor = 'rgba(34,211,238,0.1)';
-            }
-            else if (type === 'gate') {
-                card.classList.add('theme-gate');
-                card.style.setProperty('--card-bg', '#020617');
-                card.style.setProperty('--curr-accent', '#94A3B8');
-                logoContainer.innerHTML = `
-                    <div class="logo-gate-svg" style="width:100%; height:100%;">
-                        <svg viewBox="0 0 100 100"><path d="M 50 5 L 15 95 L 38 95 L 50 55 L 62 95 L 85 95 L 50 5 Z" /></svg>
-                    </div>`;
-                watermark.style.borderRadius = '0';
-                watermark.style.transform = 'rotate(45deg)';
-                watermark.style.bottom = '-90px'; watermark.style.right = '-90px';
-                watermark.style.borderColor = 'rgba(255,255,255,0.08)';
             }
         }
 
