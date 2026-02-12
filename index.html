@@ -513,8 +513,50 @@
                 </div>
                 <div class="input-group">
                     <label>Job Title</label>
-                    <input type="text" id="in-title" placeholder="Creative Director"
-                        value="Founder & Creative Director">
+                    <select id="in-title"
+                        style="width:100%; padding:10px 14px; border:1px solid #cbd5e1; border-radius:10px; font-size:0.8rem; background:#f8fafc; color:#1e293b; font-family:'Montserrat',sans-serif; appearance:auto; cursor:pointer;">
+                        <option value="Founder & Creative Director" selected>Founder & Creative Director</option>
+                        <optgroup label="Leadership">
+                            <option value="Chief Executive Officer">Chief Executive Officer (CEO)</option>
+                            <option value="Chief Technology Officer">Chief Technology Officer (CTO)</option>
+                            <option value="Chief Operating Officer">Chief Operating Officer (COO)</option>
+                            <option value="Managing Director">Managing Director</option>
+                            <option value="Co-Founder">Co-Founder</option>
+                        </optgroup>
+                        <optgroup label="Creative">
+                            <option value="Creative Director">Creative Director</option>
+                            <option value="Art Director">Art Director</option>
+                            <option value="Head of Design">Head of Design</option>
+                            <option value="UI/UX Designer">UI/UX Designer</option>
+                            <option value="Senior Designer">Senior Designer</option>
+                            <option value="Motion Designer">Motion Designer</option>
+                            <option value="Brand Strategist">Brand Strategist</option>
+                        </optgroup>
+                        <optgroup label="Development">
+                            <option value="Lead Developer">Lead Developer</option>
+                            <option value="Full Stack Developer">Full Stack Developer</option>
+                            <option value="Frontend Developer">Frontend Developer</option>
+                            <option value="Backend Developer">Backend Developer</option>
+                            <option value="Mobile Developer">Mobile Developer</option>
+                            <option value="DevOps Engineer">DevOps Engineer</option>
+                        </optgroup>
+                        <optgroup label="Management">
+                            <option value="Project Manager">Project Manager</option>
+                            <option value="Product Manager">Product Manager</option>
+                            <option value="Account Manager">Account Manager</option>
+                            <option value="Scrum Master">Scrum Master</option>
+                        </optgroup>
+                        <optgroup label="Marketing & Strategy">
+                            <option value="Digital Marketing Manager">Digital Marketing Manager</option>
+                            <option value="SEO Specialist">SEO Specialist</option>
+                            <option value="Content Strategist">Content Strategist</option>
+                            <option value="Social Media Manager">Social Media Manager</option>
+                            <option value="Growth Hacker">Growth Hacker</option>
+                        </optgroup>
+                        <option value="__custom__">✏️ Custom Title...</option>
+                    </select>
+                    <input type="text" id="in-title-custom" placeholder="Enter custom title..."
+                        style="display:none; margin-top:8px;">
                 </div>
             </div>
 
@@ -652,47 +694,43 @@
                 <div id="section-back" class="preview-section">
                     <div class="card-container">
                         <div class="business-card-back theme-ripple" id="businessCardBack">
+                            <!-- Large Subtle Watermark in Center -->
                             <div class="card-watermark" id="watermarkBack"
-                                style="width: 300px; height: 300px; right: -50px; bottom: -50px; opacity: 0.03;"></div>
+                                style="width: 320px; height: 320px; left: 50%; top: 50%; transform: translate(-50%, -50%); opacity: 0.04;">
+                            </div>
 
-                            <!-- Horizontal Split: Logo Left | QR Right -->
+                            <!-- Top-Left: Brand Identity -->
                             <div
-                                style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; position: relative; z-index: 10; gap: 0;">
-
-                                <!-- LEFT: Logo + Brand -->
-                                <div
-                                    style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                                    <div class="card-logo-container" id="cardLogoBack"
-                                        style="width: 50px; height: 50px; margin-bottom: 14px;">
-                                        <div class="logo-ripple-svg"
-                                            style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
-                                            <div class="outer" style="border-width: 2px;"></div>
-                                            <div class="inner" style="border-width: 3px;"></div>
-                                            <div class="core" style="width: 28%; height: 28%;"></div>
-                                        </div>
+                                style="position: absolute; top: 35px; left: 35px; z-index: 10; display: flex; align-items: center; gap: 12px;">
+                                <div class="card-logo-container" id="cardLogoBack" style="width: 38px; height: 38px;">
+                                    <!-- Default: Ripple (JS will update) -->
+                                    <div class="logo-ripple-svg"
+                                        style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+                                        <div class="outer" style="border-width: 1.5px;"></div>
+                                        <div class="inner" style="border-width: 2px;"></div>
+                                        <div class="core" style="width: 25%; height: 25%;"></div>
                                     </div>
+                                </div>
+                                <div style="display: flex; flex-direction: column;">
                                     <div class="card-brand-name"
-                                        style="font-size: 9px; letter-spacing: 2.5px; text-align: center; font-weight: 600; line-height: 1.6;">
+                                        style="font-size: 10px; letter-spacing: 2.5px; font-weight: 600;">
                                         ATLANTIC<br><span style="font-weight:300; color:var(--curr-accent, #d4af37)"
                                             id="back-gate-text">GATE</span>
                                     </div>
-                                </div>
-
-                                <!-- CENTER: Divider -->
-                                <div id="backDivider"
-                                    style="width: 1px; height: 55%; background: linear-gradient(to bottom, transparent, var(--curr-accent, #d4af37), transparent); opacity: 0.3;">
-                                </div>
-
-                                <div
-                                    style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                                    <canvas id="qrCanvas"
-                                        style="width: 65px; height: 65px; border-radius: 4px;"></canvas>
-                                    <p id="qrUrlLabel"
-                                        style="font-size: 5.5px; letter-spacing: 1.5px; color: #64748b; margin-top: 8px; font-weight: 400;">
-                                        atlanticgate.my.id</p>
+                                    <div
+                                        style="width: 20px; height: 1px; background: var(--curr-accent, #d4af37); margin-top: 5px; opacity: 0.6;">
+                                    </div>
                                 </div>
                             </div>
 
+                            <!-- Bottom-Right: QR + URL -->
+                            <div
+                                style="position: absolute; bottom: 35px; right: 35px; z-index: 10; display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+                                <canvas id="qrCanvas" style="width: 38px; height: 38px; border-radius: 2px;"></canvas>
+                                <p id="qrUrlLabel"
+                                    style="font-size: 5px; letter-spacing: 0.8px; color: #64748b; font-weight: 400; margin: 0; text-transform: lowercase;">
+                                    atlanticgate.my.id</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -740,10 +778,38 @@
         // Real-time Update Logic
         function updatePreview() {
             previews.name.textContent = inputs.name.value || "YOUR NAME";
-            previews.title.textContent = inputs.title.value || "JOB TITLE";
             previews.web.textContent = inputs.web.value || "website.com";
             previews.contact.textContent = inputs.contact.value;
+
+            // Title: from select or custom input
+            const titleSelect = inputs.title;
+            const customInput = document.getElementById('in-title-custom');
+            if (titleSelect.value === '__custom__') {
+                previews.title.textContent = customInput.value || "JOB TITLE";
+            } else {
+                previews.title.textContent = titleSelect.value || "JOB TITLE";
+            }
         }
+
+        // Handle title select change
+        inputs.title.addEventListener('change', function () {
+            const customInput = document.getElementById('in-title-custom');
+            if (this.value === '__custom__') {
+                customInput.style.display = 'block';
+                customInput.focus();
+            } else {
+                customInput.style.display = 'none';
+            }
+            updatePreview();
+        });
+
+        document.getElementById('in-title-custom').addEventListener('input', updatePreview);
+
+        Object.values(inputs).forEach(input => {
+            if (input.id !== 'in-title') {
+                input.addEventListener('input', updatePreview);
+            }
+        });
 
         // Tab Logic
         function switchTab(side) {
@@ -753,10 +819,6 @@
             event.target.classList.add('active');
             document.getElementById(`section-${side}`).classList.add('active');
         }
-
-        Object.values(inputs).forEach(input => {
-            input.addEventListener('input', updatePreview);
-        });
 
         // Theme / Logo Switching
         const selectBtns = document.querySelectorAll('.select-btn');
