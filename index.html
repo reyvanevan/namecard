@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlantic Gate - Card Maker</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&family=Syncopate:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Styling -->
+    <style>
+        :root {
+            /* Theme: Ripple (Default) */
+            --bg-dark: #0f172a;
+            --accent-gold: #d4af37;
+            --accent-cyan: #22D3EE;
+            --accent-silver: #94A3B8;
+            --panel-bg: #ffffff;
+            --body-bg: #f1f5f9;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--body-bg);
+            font-family: 'Montserrat', sans-serif;
+            color: #334155;
+            min-height: 100vh;
+        }
+
+        /* --- LAYOUT --- */
+        .app-container {
+            display: flex;
+            height: 100vh;
+            flex-direction: row;
+        }
+
+        /* Sidebar / Form Area */
+        .sidebar {
+            width: 400px;
+            background: var(--panel-bg);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            overflow-y: auto;
+            box-shadow: 10px 0 30px rgba(0, 0, 0, 0.03);
+            z-index: 20;
+        }
+
+        /* Preview Area */
+        .preview-area {
+            flex: 1;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #e2e8f0;
+            position: relative;
+        }
+
+        /* --- COMPONENTS --- */
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--bg-dark);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #94a3b8;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        input {
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Logo Selector */
+        .selector-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .select-btn {
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            background: #f8fafc;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .select-btn:hover {
+            border-color: #cbd5e1;
+        }
+
+        .select-btn.active {
+            border-color: #3b82f6;
+            background: #eff6ff;
+            color: #1e40af;
+        }
+
+        .select-btn i {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .select-btn span {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Action Buttons */
+        .actions {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: var(--bg-dark);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary {
+            background: white;
+            border: 1px solid #e2e8f0;
+            color: #64748b;
+        }
+
+        .btn-secondary:hover {
+            background: #f8fafc;
+        }
+
+        /* --- THE CARD (Mockup) --- */
+        .card-container {
+            transform: scale(1.6);
+            transform-origin: center;
+            transition: transform 0.5s ease;
+        }
+
+        .business-card {
+            width: 3.5in;
+            height: 2in;
+            background-color: var(--card-bg, #0f172a);
+            border-radius: 12px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.25);
+            padding: 28px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-watermark {
+            position: absolute;
+            right: -40px;
+            bottom: -40px;
+            width: 220px;
+            height: 220px;
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 5;
+        }
+
+        .card-logo-container {
+            width: 36px;
+            height: 36px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-brand-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .card-details {
+            text-align: right;
+            z-index: 5;
+        }
+
+        .card-accent-line {
+            width: 30px;
+            height: 1.5px;
+            background: var(--curr-accent, #d4af37);
+            margin-left: auto;
+            margin-bottom: 10px;
+        }
+
+        .user-name {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: white;
+            margin: 0;
+            letter-spacing: 0.8px;
+        }
+
+        .user-title {
+            font-size: 0.5rem;
+            font-weight: 500;
+            color: #94a3b8;
+            margin-top: 1px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+
+        .user-contact {
+            font-size: 0.55rem;
+            color: #cbd5e1;
+            margin-top: 12px;
+            line-height: 1.5;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+
+        /* --- LOGO DEFINITIONS --- */
+        .logo-ripple-svg .outer {
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            border-right-color: transparent;
+            transform: rotate(-45deg);
+        }
+
+        .logo-ripple-svg .inner {
+            border: 3px solid #94a3b8;
+            border-radius: 50%;
+            width: 66%;
+            height: 66%;
+            position: absolute;
+            border-left-color: transparent;
+            transform: rotate(-45deg);
+        }
+
+        .logo-ripple-svg .core {
+            background: #d4af37;
+            border-radius: 50%;
+            width: 28%;
+            height: 28%;
+            position: absolute;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+
+        .logo-portal-svg .layer {
+            position: absolute;
+            border: 1.5px solid var(--accent-cyan);
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(34, 211, 238, 0.2);
+        }
+
+        .logo-portal-svg .p1 {
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+            transform: rotate(45deg);
+        }
+
+        .logo-portal-svg .p2 {
+            width: 72%;
+            height: 72%;
+            opacity: 0.8;
+            transform: rotate(0deg);
+        }
+
+        .logo-portal-svg .p-core {
+            width: 22%;
+            height: 22%;
+            background: white;
+            box-shadow: 0 0 10px white;
+            border-radius: 2px;
+            position: absolute;
+        }
+
+        .logo-gate-svg svg {
+            width: 100%;
+            height: 100%;
+            fill: url(#silverGradient);
+        }
+
+        /* --- THEMES --- */
+        .theme-gate .card-brand-name {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .theme-portal .card-brand-name {
+            font-family: 'Syncopate', sans-serif;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
+            .app-container {
+                flex-direction: column;
+                overflow-y: auto;
+                height: auto;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            }
+
+            .preview-area {
+                padding: 4rem 1rem;
+                order: -1;
+                min-height: 400px;
+            }
+
+            .card-container {
+                transform: scale(1.0);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card-container {
+                transform: scale(0.8);
+            }
+        }
+
+        /* Print hide */
+        @media print {
+
+            .sidebar,
+            .ui-controls {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+            }
+
+            .preview-area {
+                background: transparent;
+                padding: 0;
+            }
+
+            .card-container {
+                transform: none !important;
+                box-shadow: none !important;
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- SIDEBAR: Controls -->
+        <aside class="sidebar no-print">
+            <div class="brand-logo">
+                <i class="fas fa-layer-group" style="color: #3b82f6;"></i>
+                <span>GateMaker 1.0</span>
+            </div>
+
+            <div>
+                <span class="section-title">Identity Details</span>
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="in-name" placeholder="John Doe" value="ALEX STERLING">
+                </div>
+                <div class="input-group">
+                    <label>Job Title</label>
+                    <input type="text" id="in-title" placeholder="Creative Director"
+                        value="Founder & Creative Director">
+                </div>
+            </div>
+
+            <div>
+                <span class="section-title">Connect</span>
+                <div class="input-group">
+                    <label>Website</label>
+                    <input type="text" id="in-web" placeholder="www.example.com" value="www.atlanticgate.com">
+                </div>
+                <div class="input-group">
+                    <label>Phone / Email (optional)</label>
+                    <input type="text" id="in-contact" placeholder="+62 812..." value="+62 812 3456 7890">
+                </div>
+            </div>
+
+            <div>
+                <span class="section-title">Brand Concept</span>
+                <div class="selector-grid">
+                    <button class="select-btn active" data-type="ripple">
+                        <i class="fa-regular fa-circle-dot"></i>
+                        <span>Ripple</span>
+                    </button>
+                    <button class="select-btn" data-type="portal">
+                        <i class="fa-solid fa-vector-square"></i>
+                        <span>Portal</span>
+                    </button>
+                    <button class="select-btn" data-type="gate">
+                        <i class="fa-solid fa-play" style="transform: rotate(-90deg);"></i>
+                        <span>Gate</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-primary" onclick="downloadPNG()">
+                    <i class="fas fa-download"></i>
+                    Export High-Res PNG
+                </button>
+                <button class="btn btn-secondary" onclick="window.print()">
+                    <i class="fas fa-print"></i>
+                    Print PDF
+                </button>
+            </div>
+        </aside>
+
+        <!-- PREVIEW AREA -->
+        <main class="preview-area">
+            <div class="card-container">
+                <div class="business-card theme-ripple" id="businessCard">
+                    <div class="card-watermark" id="watermark"></div>
+
+                    <div class="card-header">
+                        <div class="card-logo-container" id="cardLogo">
+                            <!-- Default: Ripple -->
+                            <div class="logo-ripple-svg"
+                                style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+                                <div class="outer"></div>
+                                <div class="inner"></div>
+                                <div class="core"></div>
+                            </div>
+                        </div>
+                        <div class="card-brand-name">
+                            ATLANTIC <span style="font-weight:300; color:var(--curr-accent, #d4af37)"
+                                id="preview-gate-text">GATE</span>
+                        </div>
+                    </div>
+
+                    <div class="card-details">
+                        <div class="card-accent-line" id="accentBar"></div>
+                        <h3 class="user-name" id="preview-name">ALEX STERLING</h3>
+                        <p class="user-title" id="preview-title">Founder & Creative Director</p>
+
+                        <div class="user-contact">
+                            <span id="preview-contact">+62 812 3456 7890</span><br>
+                            <span id="preview-web">www.atlanticgate.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hidden SVG Defs -->
+            <svg style="width:0;height:0;position:absolute;">
+                <defs>
+                    <linearGradient id="silverGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#F8FAFC;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#94A3B8;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#E2E8F0;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+            </svg>
+        </main>
+    </div>
+
+    <!-- Logic -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+    <script>
+        // DOM Elements
+        const inputs = {
+            name: document.getElementById('in-name'),
+            title: document.getElementById('in-title'),
+            web: document.getElementById('in-web'),
+            contact: document.getElementById('in-contact')
+        };
+
+        const previews = {
+            name: document.getElementById('preview-name'),
+            title: document.getElementById('preview-title'),
+            web: document.getElementById('preview-web'),
+            contact: document.getElementById('preview-contact')
+        };
+
+        const card = document.getElementById('businessCard');
+        const logoContainer = document.getElementById('cardLogo');
+        const watermark = document.getElementById('watermark');
+
+        // Real-time Update Logic
+        function updatePreview() {
+            previews.name.textContent = inputs.name.value || "YOUR NAME";
+            previews.title.textContent = inputs.title.value || "JOB TITLE";
+            previews.web.textContent = inputs.web.value || "www.website.com";
+            previews.contact.textContent = inputs.contact.value;
+        }
+
+        Object.values(inputs).forEach(input => {
+            input.addEventListener('input', updatePreview);
+        });
+
+        // Theme / Logo Switching
+        const selectBtns = document.querySelectorAll('.select-btn');
+
+        selectBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                selectBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                setTheme(btn.dataset.type);
+            });
+        });
+
+        function setTheme(type) {
+            card.className = "business-card"; // Reset
+            logoContainer.innerHTML = '';
+
+            if (type === 'ripple') {
+                card.classList.add('theme-ripple');
+                card.style.setProperty('--card-bg', '#0f172a');
+                card.style.setProperty('--curr-accent', '#d4af37');
+                logoContainer.innerHTML = `
+                    <div class="logo-ripple-svg" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+                        <div class="outer"></div>
+                        <div class="inner"></div>
+                        <div class="core"></div>
+                    </div>`;
+                watermark.style.borderRadius = '50%';
+                watermark.style.transform = 'rotate(0deg)';
+                watermark.style.bottom = '-40px'; watermark.style.right = '-40px';
+                watermark.style.borderColor = 'rgba(255,255,255,0.05)';
+            }
+            else if (type === 'portal') {
+                card.classList.add('theme-portal');
+                card.style.setProperty('--card-bg', '#000000');
+                card.style.setProperty('--curr-accent', '#22D3EE');
+                logoContainer.innerHTML = `
+                    <div class="logo-portal-svg" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+                        <div class="layer p1"></div>
+                        <div class="layer p2"></div>
+                        <div class="p-core"></div>
+                    </div>`;
+                watermark.style.borderRadius = '10px';
+                watermark.style.transform = 'rotate(45deg)';
+                watermark.style.bottom = '-70px'; watermark.style.right = '-70px';
+                watermark.style.borderColor = 'rgba(34,211,238,0.1)';
+            }
+            else if (type === 'gate') {
+                card.classList.add('theme-gate');
+                card.style.setProperty('--card-bg', '#020617');
+                card.style.setProperty('--curr-accent', '#94A3B8');
+                logoContainer.innerHTML = `
+                    <div class="logo-gate-svg" style="width:100%; height:100%;">
+                        <svg viewBox="0 0 100 100"><path d="M 50 5 L 15 95 L 38 95 L 50 55 L 62 95 L 85 95 L 50 5 Z" /></svg>
+                    </div>`;
+                watermark.style.borderRadius = '0';
+                watermark.style.transform = 'rotate(45deg)';
+                watermark.style.bottom = '-90px'; watermark.style.right = '-90px';
+                watermark.style.borderColor = 'rgba(255,255,255,0.08)';
+            }
+        }
+
+        // Export PNG Logic
+        function downloadPNG() {
+            const btn = event.currentTarget;
+            const original = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Rendering...';
+            btn.disabled = true;
+
+            htmlToImage.toPng(card, {
+                pixelRatio: 4,
+                backgroundColor: card.style.getPropertyValue('--card-bg') || '#0f172a'
+            })
+                .then(dataUrl => {
+                    const link = document.createElement('a');
+                    link.download = `BusinessCard_${inputs.name.value.replace(/ /g, '_')}.png`;
+                    link.href = dataUrl;
+                    link.click();
+                    btn.innerHTML = original;
+                    btn.disabled = false;
+                })
+                .catch(err => {
+                    alert("Render failed. Try again.");
+                    btn.innerHTML = original;
+                    btn.disabled = false;
+                });
+        }
+    </script>
+</body>
+
+</html>

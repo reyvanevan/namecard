@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #0f172a;
+            /* Deep Navy Background - Premium feel */
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            gap: 40px;
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            gap: 60px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            /* Glassmorphism */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px 40px;
+            border-radius: 16px;
+            text-align: center;
+            width: 260px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        h3 {
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        .brand-text {
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 1px;
+            margin-top: 25px;
+        }
+
+        /* --- LOGO 1: SQUARE TUNNEL --- */
+        .logo-square-box {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sq-1 {
+            width: 100%;
+            height: 100%;
+            border: 2px solid #3b82f6;
+            /* Bright Blue */
+            position: absolute;
+            opacity: 0.3;
+        }
+
+        .sq-2 {
+            width: 70%;
+            height: 70%;
+            border: 4px solid #60a5fa;
+            /* Lighter Blue */
+            position: absolute;
+            opacity: 0.6;
+        }
+
+        .sq-3 {
+            width: 40%;
+            height: 40%;
+            background-color: #d4af37;
+            /* Gold Center */
+            position: absolute;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            /* Glowing Core */
+        }
+
+        /* --- LOGO 2: CIRCULAR RIPPLE --- */
+        .logo-circle-box {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cir-1 {
+            width: 100%;
+            height: 100%;
+            border: 2px solid #3b82f6;
+            border-radius: 50%;
+            position: absolute;
+            border-right-color: transparent;
+            /* Open Loop */
+            transform: rotate(-45deg);
+        }
+
+        .cir-2 {
+            width: 70%;
+            height: 70%;
+            border: 4px solid #60a5fa;
+            border-radius: 50%;
+            position: absolute;
+            border-left-color: transparent;
+            /* Open Loop opposite */
+            transform: rotate(-45deg);
+        }
+
+        .cir-3 {
+            width: 30%;
+            height: 30%;
+            background-color: #d4af37;
+            /* Gold Center */
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h2 style="font-weight: 300; letter-spacing: 2px;">ATLANTIC GATE <span style="color:#d4af37">CONCEPTS</span>
+        </h2>
+    </div>
+
+    <div class="container">
+
+        <div class="card">
+            <h3>The Square Gate</h3>
+            <div class="logo-square-box">
+                <div class="sq-1"></div>
+                <div class="sq-2"></div>
+                <div class="sq-3"></div>
+            </div>
+            <div class="brand-text">ATLANTIC GATE</div>
+            <p style="font-size: 11px; color: #aaa; margin-top: 10px;">
+                Presisi, Digital, Terstruktur.<br>
+                "Masuk ke dalam inti solusi."
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>The Ripple Core</h3>
+            <div class="logo-circle-box">
+                <div class="cir-1"></div>
+                <div class="cir-2"></div>
+                <div class="cir-3"></div>
+            </div>
+            <div class="brand-text">ATLANTIC GATE</div>
+            <p style="font-size: 11px; color: #aaa; margin-top: 10px;">
+                Dinamis, Mengalir, Global.<br>
+                "Gelombang dampak yang meluas."
+            </p>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
