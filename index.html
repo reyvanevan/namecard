@@ -385,7 +385,7 @@
 
         /* --- THEMES --- */
         .theme-portal .card-brand-name {
-            font-family: 'Syncopate', sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
 
         /* Tab Styling */
@@ -522,7 +522,7 @@
                 <span class="section-title">Connect</span>
                 <div class="input-group">
                     <label>Website</label>
-                    <input type="text" id="in-web" placeholder="www.example.com" value="www.atlanticgate.com">
+                    <input type="text" id="in-web" placeholder="atlanticgate.my.id" value="atlanticgate.my.id">
                 </div>
                 <div class="input-group">
                     <label>Phone / Email (optional)</label>
@@ -631,7 +631,7 @@
                                                     class="fas fa-globe"
                                                     style="color: var(--curr-accent, #d4af37); font-size: 7px;"></i>
                                             </div>
-                                            <span id="preview-web">www.atlanticgate.com</span>
+                                            <span id="preview-web">atlanticgate.my.id</span>
                                         </div>
                                         <div
                                             style="display: flex; align-items: center; gap: 8px; color: #94a3b8; font-size: 7px; font-weight: 300; letter-spacing: 0.5px;">
@@ -672,7 +672,7 @@
                                         </div>
                                     </div>
                                     <div class="card-brand-name"
-                                        style="font-size: 11px; letter-spacing: 4px; text-align: center; font-weight: 600; line-height: 1.5;">
+                                        style="font-size: 9px; letter-spacing: 2.5px; text-align: center; font-weight: 600; line-height: 1.6;">
                                         ATLANTIC<br><span style="font-weight:300; color:var(--curr-accent, #d4af37)"
                                             id="back-gate-text">GATE</span>
                                     </div>
@@ -689,7 +689,7 @@
                                         style="width: 65px; height: 65px; border-radius: 4px;"></canvas>
                                     <p id="qrUrlLabel"
                                         style="font-size: 5.5px; letter-spacing: 1.5px; color: #64748b; margin-top: 8px; font-weight: 400;">
-                                        atlanticgate.com</p>
+                                        atlanticgate.my.id</p>
                                 </div>
                             </div>
 
@@ -741,7 +741,7 @@
         function updatePreview() {
             previews.name.textContent = inputs.name.value || "YOUR NAME";
             previews.title.textContent = inputs.title.value || "JOB TITLE";
-            previews.web.textContent = inputs.web.value || "www.website.com";
+            previews.web.textContent = inputs.web.value || "website.com";
             previews.contact.textContent = inputs.contact.value;
         }
 
@@ -871,7 +871,7 @@
 
         // QR Code Generation
         function generateQR() {
-            const rawUrl = inputs.web.value || 'https://atlanticgate.com';
+            const rawUrl = inputs.web.value || 'https://atlanticgate.my.id';
             const fullUrl = rawUrl.startsWith('http') ? rawUrl : 'https://' + rawUrl;
             const qr = new QRious({
                 element: document.getElementById('qrCanvas'),
