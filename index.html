@@ -210,19 +210,29 @@
             transition: transform 0.5s ease;
         }
 
-        .business-card {
+        .business-card,
+        .business-card-back {
             width: 3.5in;
             height: 2in;
             background-color: var(--card-bg, #0f172a);
             border-radius: 12px;
             box-shadow: 0 40px 80px rgba(0, 0, 0, 0.25);
-            padding: 28px;
+            padding: 40px;
             position: relative;
             overflow: hidden;
             display: flex;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .business-card {
             flex-direction: column;
             justify-content: space-between;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .business-card-back {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .card-watermark {
@@ -376,6 +386,55 @@
             font-family: 'Syncopate', sans-serif;
         }
 
+        /* Tab Styling */
+        .preview-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 5px;
+            border-radius: 50px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .tab-btn {
+            padding: 8px 24px;
+            border-radius: 50px;
+            border: none;
+            background: transparent;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #64748b;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tab-btn.active {
+            background: var(--bg-dark);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .preview-content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .preview-section {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .preview-section.active {
+            display: flex;
+        }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
             .app-container {
@@ -484,9 +543,14 @@
             </div>
 
             <div class="actions">
-                <button class="btn btn-primary" onclick="downloadPNG()">
+                <button class="btn btn-primary" onclick="downloadPNG('businessCard', 'Front')">
                     <i class="fas fa-download"></i>
-                    Export High-Res PNG
+                    Export Front PNG
+                </button>
+                <button class="btn btn-primary" onclick="downloadPNG('businessCardBack', 'Back')"
+                    style="background: #334155;">
+                    <i class="fas fa-download"></i>
+                    Export Back PNG
                 </button>
                 <button class="btn btn-secondary" onclick="window.print()">
                     <i class="fas fa-print"></i>
@@ -497,34 +561,112 @@
 
         <!-- PREVIEW AREA -->
         <main class="preview-area">
-            <div class="card-container">
-                <div class="business-card theme-ripple" id="businessCard">
-                    <div class="card-watermark" id="watermark"></div>
+            <!-- Tabs -->
+            <div class="preview-tabs no-print">
+                <button class="tab-btn active" onclick="switchTab('front')">Front Side</button>
+                <button class="tab-btn" onclick="switchTab('back')">Back Side</button>
+            </div>
 
-                    <div class="card-header">
-                        <div class="card-logo-container" id="cardLogo">
-                            <!-- Default: Ripple -->
-                            <div class="logo-ripple-svg"
-                                style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
-                                <div class="outer"></div>
-                                <div class="inner"></div>
-                                <div class="core"></div>
+            <div class="preview-content">
+                <!-- Front Section -->
+                <div id="section-front" class="preview-section active">
+                    <div class="card-container">
+                        <div class="business-card theme-ripple" id="businessCard">
+                            <div class="card-watermark" id="watermark"></div>
+
+                            <div
+                                style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: space-between; position: relative; z-index: 10;">
+
+                                <!-- LEFT: Identity -->
+                                <div
+                                    style="flex: 0 0 35%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                                    <div class="card-logo-container" id="cardLogo"
+                                        style="width: 38px; height: 38px; margin-bottom: 14px;">
+                                        <div class="logo-ripple-svg"
+                                            style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+                                            <div class="outer"></div>
+                                            <div class="inner"></div>
+                                            <div class="core"></div>
+                                        </div>
+                                    </div>
+                                    <div class="card-brand-name"
+                                        style="font-size: 10px; letter-spacing: 3px; line-height: 1.5;">
+                                        ATLANTIC<br><span style="font-weight:300; color:var(--curr-accent, #d4af37)"
+                                            id="preview-gate-text">GATE</span>
+                                    </div>
+                                </div>
+
+                                <!-- CENTER: Divider -->
+                                <div class="card-accent-line" id="accentBar"
+                                    style="width: 1px; height: 65%; background: linear-gradient(to bottom, transparent, var(--curr-accent, #d4af37), transparent); opacity: 0.4; margin: 0;">
+                                </div>
+
+                                <!-- RIGHT: Details -->
+                                <div
+                                    style="flex: 1; padding-left: 25px; display: flex; flex-direction: column; justify-content: center;">
+
+                                    <div style="margin-bottom: 18px;">
+                                        <h3 class="user-name" id="preview-name"
+                                            style="font-size: 11px; font-weight: 600; letter-spacing: 2px; margin-bottom: 4px;">
+                                            PABLO ESKOJAR</h3>
+                                        <p class="user-title" id="preview-title"
+                                            style="font-size: 6.5px; font-weight: 400; letter-spacing: 2.5px; color: var(--curr-accent, #d4af37); opacity: 0.8; margin: 0;">
+                                            FOUNDER & CREATIVE DIRECTOR</p>
+                                    </div>
+
+                                    <div class="contact-info" style="display: flex; flex-direction: column; gap: 7px;">
+                                        <div
+                                            style="display: flex; align-items: center; gap: 8px; color: #94a3b8; font-size: 7px; font-weight: 300; letter-spacing: 0.5px;">
+                                            <div style="width: 10px; display: flex; justify-content: center;"><i
+                                                    class="fas fa-phone"
+                                                    style="color: var(--curr-accent, #d4af37); font-size: 7px;"></i>
+                                            </div>
+                                            <span id="preview-contact">+62 812 3456 7890</span>
+                                        </div>
+                                        <div
+                                            style="display: flex; align-items: center; gap: 8px; color: #94a3b8; font-size: 7px; font-weight: 300; letter-spacing: 0.5px;">
+                                            <div style="width: 10px; display: flex; justify-content: center;"><i
+                                                    class="fas fa-globe"
+                                                    style="color: var(--curr-accent, #d4af37); font-size: 7px;"></i>
+                                            </div>
+                                            <span id="preview-web">www.atlanticgate.com</span>
+                                        </div>
+                                        <div
+                                            style="display: flex; align-items: center; gap: 8px; color: #94a3b8; font-size: 7px; font-weight: 300; letter-spacing: 0.5px;">
+                                            <div style="width: 10px; display: flex; justify-content: center;"><i
+                                                    class="fas fa-location-dot"
+                                                    style="color: var(--curr-accent, #d4af37); font-size: 7px;"></i>
+                                            </div>
+                                            <span>Jakarta, Indonesia</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-brand-name">
-                            ATLANTIC <span style="font-weight:300; color:var(--curr-accent, #d4af37)"
-                                id="preview-gate-text">GATE</span>
-                        </div>
                     </div>
+                </div>
 
-                    <div class="card-details">
-                        <div class="card-accent-line" id="accentBar"></div>
-                        <h3 class="user-name" id="preview-name">PABLO ESKOJAR</h3>
-                        <p class="user-title" id="preview-title">Founder & Creative Director</p>
+                <!-- Back Section -->
+                <div id="section-back" class="preview-section">
+                    <div class="card-container">
+                        <div class="business-card-back theme-ripple" id="businessCardBack">
+                            <div class="card-watermark" id="watermarkBack"
+                                style="width: 300px; height: 300px; right: -50px; bottom: -50px; opacity: 0.03;"></div>
 
-                        <div class="user-contact">
-                            <span id="preview-contact">+62 812 3456 7890</span><br>
-                            <span id="preview-web">www.atlanticgate.com</span>
+                            <div class="card-logo-container" id="cardLogoBack"
+                                style="width: 60px; height: 60px; margin-bottom: 18px;">
+                                <div class="logo-ripple-svg"
+                                    style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+                                    <div class="outer" style="border-width: 2px;"></div>
+                                    <div class="inner" style="border-width: 3px;"></div>
+                                    <div class="core" style="width: 28%; height: 28%;"></div>
+                                </div>
+                            </div>
+                            <div class="card-brand-name"
+                                style="font-size: 14px; letter-spacing: 5px; text-align: center; font-weight: 600;">
+                                ATLANTIC <span style="font-weight:300; color:var(--curr-accent, #d4af37)"
+                                    id="back-gate-text">GATE</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -562,8 +704,12 @@
         };
 
         const card = document.getElementById('businessCard');
+        const cardBack = document.getElementById('businessCardBack');
         const logoContainer = document.getElementById('cardLogo');
+        const logoContainerBack = document.getElementById('cardLogoBack');
         const watermark = document.getElementById('watermark');
+        const watermarkBack = document.getElementById('watermarkBack');
+        const backGateText = document.getElementById('back-gate-text');
 
         // Real-time Update Logic
         function updatePreview() {
@@ -571,6 +717,15 @@
             previews.title.textContent = inputs.title.value || "JOB TITLE";
             previews.web.textContent = inputs.web.value || "www.website.com";
             previews.contact.textContent = inputs.contact.value;
+        }
+
+        // Tab Logic
+        function switchTab(side) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.preview-section').forEach(sec => sec.classList.remove('active'));
+
+            event.target.classList.add('active');
+            document.getElementById(`section-${side}`).classList.add('active');
         }
 
         Object.values(inputs).forEach(input => {
@@ -590,55 +745,92 @@
 
         function setTheme(type) {
             card.className = "business-card"; // Reset
+            cardBack.className = "business-card-back";
             logoContainer.innerHTML = '';
+            logoContainerBack.innerHTML = '';
 
             if (type === 'ripple') {
                 card.classList.add('theme-ripple');
-                card.style.setProperty('--card-bg', '#0f172a');
-                card.style.setProperty('--curr-accent', '#d4af37');
-                logoContainer.innerHTML = `
+                cardBack.classList.add('theme-ripple');
+                const darkBg = '#0f172a';
+                const goldAccent = '#d4af37';
+                card.style.setProperty('--card-bg', darkBg);
+                cardBack.style.setProperty('--card-bg', darkBg);
+                card.style.setProperty('--curr-accent', goldAccent);
+                cardBack.style.setProperty('--curr-accent', goldAccent);
+
+                const rippleHtml = `
                     <div class="logo-ripple-svg" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
                         <div class="outer"></div>
                         <div class="inner"></div>
                         <div class="core"></div>
                     </div>`;
+                const rippleHtmlBack = `
+                    <div class="logo-ripple-svg" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+                        <div class="outer" style="border-width: 3px;"></div>
+                        <div class="inner" style="border-width: 4px;"></div>
+                        <div class="core" style="width: 30%; height: 30%;"></div>
+                    </div>`;
+
+                logoContainer.innerHTML = rippleHtml;
+                logoContainerBack.innerHTML = rippleHtmlBack;
+
                 watermark.style.borderRadius = '50%';
+                watermarkBack.style.borderRadius = '50%';
                 watermark.style.transform = 'rotate(0deg)';
+                watermarkBack.style.transform = 'rotate(0deg)';
                 watermark.style.bottom = '-40px'; watermark.style.right = '-40px';
                 watermark.style.borderColor = 'rgba(255,255,255,0.05)';
+                watermarkBack.style.borderColor = 'rgba(255,255,255,0.05)';
+                backGateText.style.color = goldAccent;
             }
             else if (type === 'portal') {
                 card.classList.add('theme-portal');
-                card.style.setProperty('--card-bg', '#000000');
-                card.style.setProperty('--curr-accent', '#22D3EE');
-                logoContainer.innerHTML = `
+                cardBack.classList.add('theme-portal');
+                const blackBg = '#000000';
+                const cyanAccent = '#22D3EE';
+                card.style.setProperty('--card-bg', blackBg);
+                cardBack.style.setProperty('--card-bg', blackBg);
+                card.style.setProperty('--curr-accent', cyanAccent);
+                cardBack.style.setProperty('--curr-accent', cyanAccent);
+
+                const portalHtml = `
                     <div class="logo-portal-svg" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
                         <div class="layer p1"></div>
                         <div class="layer p2"></div>
                         <div class="layer p3"></div>
                         <div class="p-core"></div>
                     </div>`;
+
+                logoContainer.innerHTML = portalHtml;
+                logoContainerBack.innerHTML = portalHtml; // Same for back
+
                 watermark.style.borderRadius = '10px';
+                watermarkBack.style.borderRadius = '10px';
                 watermark.style.transform = 'rotate(45deg)';
+                watermarkBack.style.transform = 'rotate(45deg)';
                 watermark.style.bottom = '-70px'; watermark.style.right = '-70px';
                 watermark.style.borderColor = 'rgba(34,211,238,0.1)';
+                watermarkBack.style.borderColor = 'rgba(34,211,238,0.1)';
+                backGateText.style.color = cyanAccent;
             }
         }
 
         // Export PNG Logic
-        function downloadPNG() {
+        function downloadPNG(elementId, sideName) {
+            const node = document.getElementById(elementId);
             const btn = event.currentTarget;
             const original = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Rendering...';
             btn.disabled = true;
 
-            htmlToImage.toPng(card, {
+            htmlToImage.toPng(node, {
                 pixelRatio: 4,
-                backgroundColor: card.style.getPropertyValue('--card-bg') || '#0f172a'
+                backgroundColor: node.style.getPropertyValue('--card-bg') || (elementId === 'businessCard' ? '#0f172a' : '#000000')
             })
                 .then(dataUrl => {
                     const link = document.createElement('a');
-                    link.download = `BusinessCard_${inputs.name.value.replace(/ /g, '_')}.png`;
+                    link.download = `BusinessCard_${sideName}_${inputs.name.value.replace(/ /g, '_')}.png`;
                     link.href = dataUrl;
                     link.click();
                     btn.innerHTML = original;
