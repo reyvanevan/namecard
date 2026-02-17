@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atlantic Gate - Card Maker</title>
+    <title>Kromia Tech - Card Maker</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&family=Syncopate:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- QR Code -->
@@ -19,9 +19,10 @@
     <!-- Styling -->
     <style>
         :root {
-            /* Theme: Ripple (Default) */
-            --bg-dark: #0f172a;
-            --accent-gold: #d4af37;
+            /* Theme: Kromia (Deep Ocean) */
+            --bg-dark: #020617;
+            --accent-gold: #0ea5e9;
+            /* Replaced Gold with Kromia Blue */
             --accent-cyan: #22D3EE;
             --accent-silver: #94A3B8;
             --panel-bg: #ffffff;
@@ -280,7 +281,7 @@
         .card-accent-line {
             width: 30px;
             height: 1.5px;
-            background: var(--curr-accent, #d4af37);
+            background: var(--curr-accent, #0ea5e9);
             margin-left: auto;
             margin-bottom: 10px;
         }
@@ -333,59 +334,27 @@
         }
 
         .logo-ripple-svg .core {
-            background: #d4af37;
+            background: #0ea5e9;
             border-radius: 50%;
             width: 28%;
             height: 28%;
             position: absolute;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+            box-shadow: 0 0 10px rgba(14, 165, 233, 0.8);
         }
 
-        .logo-portal-svg .layer {
-            position: absolute;
-            border: 1.5px solid rgba(0, 255, 255, 0.5);
-            transition: all 0.5s ease-out;
-            border-radius: 4px;
-        }
 
-        .logo-portal-svg .p1 {
-            width: 100%;
-            height: 100%;
-            opacity: 0.3;
-            border-color: #064E3B;
-            transform: rotate(45deg);
-        }
-
-        .logo-portal-svg .p2 {
-            width: 70%;
-            height: 70%;
-            opacity: 0.6;
-            border-color: #0D9488;
-            transform: rotate(0deg);
-        }
-
-        .logo-portal-svg .p3 {
-            width: 45%;
-            height: 45%;
-            opacity: 0.8;
-            border-color: #22D3EE;
-            box-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
-            transform: rotate(45deg);
-        }
-
-        .logo-portal-svg .p-core {
-            width: 20%;
-            height: 20%;
-            background: white;
-            border: none;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-            border-radius: 2px;
-            position: absolute;
-        }
 
         /* --- THEMES --- */
-        .theme-portal .card-brand-name {
-            font-family: 'Montserrat', sans-serif;
+
+
+        .card-brand-name {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .user-name,
+        .user-title,
+        .user-contact {
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         /* Tab Styling */
@@ -663,15 +632,15 @@
         <!-- SIDEBAR: Controls -->
         <aside class="sidebar no-print">
             <div class="brand-logo">
-                <i class="fas fa-layer-group" style="color: #3b82f6;"></i>
-                <span>Atlantic GateMaker</span>
+                <i class="fas fa-layer-group" style="color: #0ea5e9;"></i>
+                <span>Kromia Tech</span>
             </div>
 
             <div>
                 <span class="section-title">Identity Details</span>
                 <div class="input-group">
                     <label>Full Name</label>
-                    <input type="text" id="in-name" placeholder="John Doe" value="PABLO ESKOJAR">
+                    <input type="text" id="in-name" placeholder="John Doe" value="ALEXANDER KROMIA">
                 </div>
                 <div class="input-group">
                     <label>Job Title</label>
@@ -726,27 +695,19 @@
                 <span class="section-title">Connect</span>
                 <div class="input-group">
                     <label>Website</label>
-                    <input type="text" id="in-web" placeholder="atlanticgate.my.id" value="atlanticgate.my.id">
+                    <input type="text" id="in-web" placeholder="kromia.tech" value="kromia.tech">
                 </div>
                 <div class="input-group">
                     <label>Phone / Email (optional)</label>
                     <input type="text" id="in-contact" placeholder="+62 812..." value="+62 812 3456 7890">
                 </div>
-            </div>
-
-            <div>
-                <span class="section-title">Brand Concept</span>
-                <div class="selector-grid">
-                    <button class="select-btn active" data-type="ripple">
-                        <i class="fa-regular fa-circle-dot"></i>
-                        <span>Ripple</span>
-                    </button>
-                    <button class="select-btn" data-type="portal">
-                        <i class="fa-solid fa-vector-square"></i>
-                        <span>Portal</span>
-                    </button>
+                <div class="input-group">
+                    <label>Address</label>
+                    <input type="text" id="in-address" placeholder="Location..." value="Cijeruk, Indonesia">
                 </div>
             </div>
+
+
 
             <div class="actions">
                 <button class="btn btn-primary" onclick="openExportMode('front')"
@@ -793,14 +754,14 @@
                                     </div>
                                     <div class="card-brand-name"
                                         style="font-size: 10px; letter-spacing: 3px; line-height: 1.5;">
-                                        ATLANTIC<br><span style="font-weight:300; color:var(--curr-accent, #d4af37)"
-                                            id="preview-gate-text">GATE</span>
+                                        KROMIA<br><span style="font-weight:300; color:var(--curr-accent, #0ea5e9)"
+                                            id="preview-gate-text">TECH</span>
                                     </div>
                                 </div>
 
                                 <!-- CENTER: Divider -->
                                 <div class="card-accent-line" id="accentBar"
-                                    style="width: 1px; height: 65%; background: linear-gradient(to bottom, transparent, var(--curr-accent, #d4af37), transparent); opacity: 0.4; margin: 0;">
+                                    style="width: 1px; height: 65%; background: linear-gradient(to bottom, transparent, var(--curr-accent, #0ea5e9), transparent); opacity: 0.4; margin: 0;">
                                 </div>
 
                                 <!-- RIGHT: Details -->
@@ -810,9 +771,9 @@
                                     <div style="margin-bottom: 18px;">
                                         <h3 class="user-name" id="preview-name"
                                             style="font-size: 11px; font-weight: 600; letter-spacing: 2px; margin-bottom: 4px;">
-                                            PABLO ESKOJAR</h3>
+                                            ALEXANDER KROMIA</h3>
                                         <p class="user-title" id="preview-title"
-                                            style="font-size: 6.5px; font-weight: 400; letter-spacing: 2.5px; color: var(--curr-accent, #d4af37); opacity: 0.8; margin: 0;">
+                                            style="font-size: 6.5px; font-weight: 400; letter-spacing: 2.5px; color: var(--curr-accent, #0ea5e9); opacity: 0.8; margin: 0;">
                                             FOUNDER & CREATIVE DIRECTOR</p>
                                     </div>
 
@@ -820,7 +781,7 @@
                                         <div
                                             style="display: flex; align-items: center; gap: 8px; color: #94a3b8; font-size: 7px; font-weight: 300; letter-spacing: 0.5px;">
                                             <svg width="8" height="8" viewBox="0 0 512 512"
-                                                fill="var(--curr-accent, #d4af37)" style="flex-shrink:0;">
+                                                fill="var(--curr-accent, #0ea5e9)" style="flex-shrink:0;">
                                                 <path
                                                     d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z" />
                                             </svg>
@@ -829,20 +790,20 @@
                                         <div
                                             style="display: flex; align-items: center; gap: 8px; color: #94a3b8; font-size: 7px; font-weight: 300; letter-spacing: 0.5px;">
                                             <svg width="8" height="8" viewBox="0 0 512 512"
-                                                fill="var(--curr-accent, #d4af37)" style="flex-shrink:0;">
+                                                fill="var(--curr-accent, #0ea5e9)" style="flex-shrink:0;">
                                                 <path
                                                     d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64H348.7c2.2 20.4 3.3 41.8 3.3 64zm28.8-64H503.9c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7c10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5c11.6 26 20.9 58.2 27 94.7zm-209 0H18.6C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM8.1 192H131.2c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64zM194.7 446.6c-11.6-26-20.9-58.2-27-94.6H344.3c-6.1 36.4-15.5 68.6-27 94.6c-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6C112.2 482.9 48.6 426.1 18.6 352H135.3zm245.1 0H493.4c-29.9 74.1-93.6 130.9-171.9 151.6c25.5-34.2 45.2-87.7 55.3-151.6z" />
                                             </svg>
-                                            <span id="preview-web">atlanticgate.my.id</span>
+                                            <span id="preview-web">kromia.tech</span>
                                         </div>
                                         <div
                                             style="display: flex; align-items: center; gap: 8px; color: #94a3b8; font-size: 7px; font-weight: 300; letter-spacing: 0.5px;">
                                             <svg width="8" height="8" viewBox="0 0 384 512"
-                                                fill="var(--curr-accent, #d4af37)" style="flex-shrink:0;">
+                                                fill="var(--curr-accent, #0ea5e9)" style="flex-shrink:0;">
                                                 <path
                                                     d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />
                                             </svg>
-                                            <span>Cijeruk, Indonesia</span>
+                                            <span id="preview-address">Cijeruk, Indonesia</span>
                                         </div>
                                     </div>
                                 </div>
@@ -875,11 +836,11 @@
                                 <div style="display: flex; flex-direction: column;">
                                     <div class="card-brand-name"
                                         style="font-size: 10px; letter-spacing: 2.5px; font-weight: 600;">
-                                        ATLANTIC<br><span style="font-weight:300; color:var(--curr-accent, #d4af37)"
-                                            id="back-gate-text">GATE</span>
+                                        KROMIA<br><span style="font-weight:300; color:var(--curr-accent, #0ea5e9)"
+                                            id="back-gate-text">TECH</span>
                                     </div>
                                     <div
-                                        style="width: 20px; height: 1px; background: var(--curr-accent, #d4af37); margin-top: 5px; opacity: 0.6;">
+                                        style="width: 20px; height: 1px; background: var(--curr-accent, #0ea5e9); margin-top: 5px; opacity: 0.6;">
                                     </div>
                                 </div>
                             </div>
@@ -890,7 +851,7 @@
                                 <canvas id="qrCanvas" style="width: 38px; height: 38px; border-radius: 2px;"></canvas>
                                 <p id="qrUrlLabel"
                                     style="font-size: 5px; letter-spacing: 0.8px; color: #64748b; font-weight: 400; margin: 0; text-transform: lowercase;">
-                                    atlanticgate.my.id</p>
+                                    kromia.tech</p>
                             </div>
                         </div>
                     </div>
@@ -911,52 +872,66 @@
     </div>
 
     <!-- Export Mode Overlay -->
+    <!-- Export Mode Overlay -->
     <div id="exportOverlay"
-        style="display:none; position:fixed; inset:0; z-index:9999; background:#000; flex-direction:column; align-items:center; justify-content:center;">
+        style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.95); flex-direction:column; align-items:center; justify-content:center; backdrop-filter:blur(5px);">
 
         <!-- Top Bar -->
         <div
-            style="position:absolute; top:0; left:0; right:0; padding:16px 24px; display:flex; justify-content:space-between; align-items:center; z-index:10;">
-            <div style="display:flex; gap:8px;">
+            style="position:absolute; top:0; left:0; right:0; padding:20px 30px; display:flex; justify-content:space-between; align-items:center; z-index:10;">
+            <div style="display:flex; gap:10px;">
                 <button id="expFrontBtn" onclick="switchExport('front')"
-                    style="padding:8px 18px; border:1px solid #475569; border-radius:8px; background:#1e293b; color:#e2e8f0; font-family:'Montserrat',sans-serif; font-size:12px; cursor:pointer; letter-spacing:1px;">FRONT</button>
+                    style="padding:8px 20px; border:1px solid #475569; border-radius:8px; background:#1e293b; color:#e2e8f0; font-family:'Montserrat',sans-serif; font-size:12px; cursor:pointer; letter-spacing:1px; font-weight:600; transition:0.2s;">FRONT</button>
                 <button id="expBackBtn" onclick="switchExport('back')"
-                    style="padding:8px 18px; border:1px solid #475569; border-radius:8px; background:transparent; color:#64748b; font-family:'Montserrat',sans-serif; font-size:12px; cursor:pointer; letter-spacing:1px;">BACK</button>
+                    style="padding:8px 20px; border:1px solid #475569; border-radius:8px; background:transparent; color:#64748b; font-family:'Montserrat',sans-serif; font-size:12px; cursor:pointer; letter-spacing:1px; font-weight:600; transition:0.2s;">BACK</button>
             </div>
-            <div style="color:#64748b; font-size:11px; font-family:'Montserrat',sans-serif; letter-spacing:0.5px;">
-                Right-click card → <strong style="color:#e2e8f0;">Save Image As</strong> or use <strong
-                    style="color:#e2e8f0;">Screenshot Tool</strong></div>
-            <button onclick="closeExportMode()"
-                style="padding:8px 18px; border:1px solid #475569; border-radius:8px; background:#1e293b; color:#e2e8f0; font-family:'Montserrat',sans-serif; font-size:12px; cursor:pointer;"><i
-                    class="fas fa-times"></i> Close</button>
+
+            <div style="display:flex; gap:12px;">
+                <button id="downloadBtn" onclick="triggerDownload()"
+                    style="padding:10px 24px; border:none; border-radius:8px; background:white; color:black; font-family:'Montserrat',sans-serif; font-size:12px; cursor:pointer; font-weight:700; display:flex; align-items:center; gap:8px; box-shadow:0 0 15px rgba(255,255,255,0.1);">
+                    <i class="fas fa-download"></i> SAVE IMAGE
+                </button>
+                <button onclick="closeExportMode()"
+                    style="padding:10px 16px; border:1px solid #475569; border-radius:8px; background:transparent; color:#94a3b8; font-family:'Montserrat',sans-serif; font-size:12px; cursor:pointer; transition:0.2s;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
         </div>
 
         <!-- Scaled Card Container -->
-        <div id="exportCardContainer" style="transform: scale(3); transform-origin: center center;"></div>
+        <!-- We add a wrapper to center it perfectly -->
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; width:100%; overflow:hidden;">
+            <div id="exportCardContainer" style="transform: scale(1); box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+                <!-- Card clone will be injected here -->
+            </div>
+        </div>
 
         <!-- Bottom Info -->
         <div
-            style="position:absolute; bottom:20px; color:#475569; font-size:11px; font-family:'Montserrat',sans-serif; letter-spacing:0.5px;">
-            Output: ~1050×600px · 300+ DPI · Print Ready
+            style="position:absolute; bottom:25px; color:#475569; font-size:11px; font-family:'Montserrat',sans-serif; letter-spacing:0.5px; text-align:center;">
+            High-Fidelity Rendering Mode · {html-to-image} Engine<br>
+            <span style="opacity:0.5">Note: If shadows look clipped, try saving again.</span>
         </div>
     </div>
 
     <!-- Logic -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
     <script>
         // DOM Elements
         const inputs = {
             name: document.getElementById('in-name'),
             title: document.getElementById('in-title'),
             web: document.getElementById('in-web'),
-            contact: document.getElementById('in-contact')
+            contact: document.getElementById('in-contact'),
+            address: document.getElementById('in-address')
         };
 
         const previews = {
             name: document.getElementById('preview-name'),
             title: document.getElementById('preview-title'),
             web: document.getElementById('preview-web'),
-            contact: document.getElementById('preview-contact')
+            contact: document.getElementById('preview-contact'),
+            address: document.getElementById('preview-address')
         };
 
         const card = document.getElementById('businessCard');
@@ -967,11 +942,15 @@
         const watermarkBack = document.getElementById('watermarkBack');
         const backGateText = document.getElementById('back-gate-text');
 
+        // Global state for current export side
+        let currentExportSide = 'front';
+
         // Real-time Update Logic
         function updatePreview() {
             previews.name.textContent = inputs.name.value || "YOUR NAME";
             previews.web.textContent = inputs.web.value || "website.com";
             previews.contact.textContent = inputs.contact.value;
+            previews.address.textContent = inputs.address.value;
 
             // Title: from select or custom input
             const titleSelect = inputs.title;
@@ -1032,8 +1011,8 @@
             if (type === 'ripple') {
                 card.classList.add('theme-ripple');
                 cardBack.classList.add('theme-ripple');
-                const darkBg = '#0f172a';
-                const goldAccent = '#d4af37';
+                const darkBg = '#020617';
+                const goldAccent = '#0ea5e9';
                 card.style.setProperty('--card-bg', darkBg);
                 cardBack.style.setProperty('--card-bg', darkBg);
                 card.style.setProperty('--curr-accent', goldAccent);
@@ -1064,92 +1043,32 @@
                 watermarkBack.style.borderColor = 'rgba(255,255,255,0.05)';
                 backGateText.style.color = goldAccent;
             }
-            else if (type === 'portal') {
-                card.classList.add('theme-portal');
-                cardBack.classList.add('theme-portal');
-                const blackBg = '#000000';
-                const cyanAccent = '#22D3EE';
-                card.style.setProperty('--card-bg', blackBg);
-                cardBack.style.setProperty('--card-bg', blackBg);
-                card.style.setProperty('--curr-accent', cyanAccent);
-                cardBack.style.setProperty('--curr-accent', cyanAccent);
-
-                const portalHtml = `
-                    <div class="logo-portal-svg" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
-                        <div class="layer p1"></div>
-                        <div class="layer p2"></div>
-                        <div class="layer p3"></div>
-                        <div class="p-core"></div>
-                    </div>`;
-
-                logoContainer.innerHTML = portalHtml;
-                logoContainerBack.innerHTML = portalHtml; // Same for back
-
-                watermark.style.borderRadius = '10px';
-                watermarkBack.style.borderRadius = '10px';
-                watermark.style.transform = 'rotate(45deg)';
-                watermarkBack.style.transform = 'rotate(45deg)';
-                watermark.style.bottom = '-70px'; watermark.style.right = '-70px';
-                watermark.style.borderColor = 'rgba(34,211,238,0.1)';
-                watermarkBack.style.borderColor = 'rgba(34,211,238,0.1)';
-                backGateText.style.color = cyanAccent;
-            }
-        }
-
-        // Export PNG Logic
-        function downloadPNG(elementId, sideName) {
-            const node = document.getElementById(elementId);
-            const btn = event.currentTarget;
-            const original = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Rendering...';
-            btn.disabled = true;
-
-            const bgColor = node.style.getPropertyValue('--card-bg') || (elementId === 'businessCard' ? '#0f172a' : '#000000');
-
-            html2canvas(node, {
-                scale: 4,
-                backgroundColor: bgColor,
-                useCORS: true,
-                allowTaint: true,
-                logging: false
-            })
-                .then(canvas => {
-                    const link = document.createElement('a');
-                    link.download = `BusinessCard_${sideName}_${inputs.name.value.replace(/ /g, '_')}.png`;
-                    link.href = canvas.toDataURL('image/png');
-                    link.click();
-                    btn.innerHTML = original;
-                    btn.disabled = false;
-                })
-                .catch(err => {
-                    console.error('Export error:', err);
-                    alert("Render failed. Try again.");
-                    btn.innerHTML = original;
-                    btn.disabled = false;
-                });
         }
 
         // QR Code Generation
         function generateQR() {
-            const rawUrl = inputs.web.value || 'https://atlanticgate.my.id';
+            const rawUrl = inputs.web.value || 'https://kromia.tech';
             const fullUrl = rawUrl.startsWith('http') ? rawUrl : 'https://' + rawUrl;
-            const qr = new QRious({
-                element: document.getElementById('qrCanvas'),
-                value: fullUrl,
-                size: 260,
-                foreground: '#ffffff',
-                background: 'transparent',
-                level: 'M'
-            });
 
-            // Update URL label (strip protocol and www.)
+            // Check if QRious is loaded
+            if (typeof QRious !== 'undefined') {
+                const qr = new QRious({
+                    element: document.getElementById('qrCanvas'),
+                    value: fullUrl,
+                    size: 260,
+                    foreground: '#ffffff',
+                    background: 'transparent',
+                    level: 'M'
+                });
+            }
+
+            // Update URL label
             const cleanUrl = rawUrl.replace(/^https?:\/\//, '').replace(/^www\./, '');
             document.getElementById('qrUrlLabel').textContent = cleanUrl;
         }
 
-        // Generate QR on load and on web input change
-        generateQR();
         inputs.web.addEventListener('input', generateQR);
+        window.addEventListener('load', generateQR);
 
         // ======= EXPORT MODE =======
         function openExportMode(side) {
@@ -1165,6 +1084,7 @@
         }
 
         function switchExport(side) {
+            currentExportSide = side;
             const container = document.getElementById('exportCardContainer');
             const frontBtn = document.getElementById('expFrontBtn');
             const backBtn = document.getElementById('expBackBtn');
@@ -1172,14 +1092,21 @@
             // Clone the appropriate card
             const sourceId = side === 'front' ? 'businessCard' : 'businessCardBack';
             const source = document.getElementById(sourceId);
+
+            // We clone carefully to preserve styles
             const clone = source.cloneNode(true);
-            clone.id = ''; // Remove ID to avoid conflicts
-            clone.style.boxShadow = 'none'; // Clean for export
+            clone.id = 'exportTarget'; // Specific ID for targeting
+            clone.style.transform = 'none'; // Reset any scaling
+            clone.style.margin = '0';
+
+            // Ensure clone is visible and has dimension
+            clone.style.width = '350px'; // Force dimensions to match CSS
+            clone.style.height = '200px';
 
             container.innerHTML = '';
             container.appendChild(clone);
 
-            // If back side has QR canvas, redraw it on the clone
+            // If back side has QR canvas, we must manually copy the canvas content
             if (side === 'back') {
                 const clonedCanvas = clone.querySelector('canvas');
                 const originalCanvas = document.getElementById('qrCanvas');
@@ -1187,6 +1114,8 @@
                     const ctx = clonedCanvas.getContext('2d');
                     clonedCanvas.width = originalCanvas.width;
                     clonedCanvas.height = originalCanvas.height;
+                    clonedCanvas.style.width = '38px'; // Ensure CSS size is kept
+                    clonedCanvas.style.height = '38px';
                     ctx.drawImage(originalCanvas, 0, 0);
                 }
             }
@@ -1196,6 +1125,42 @@
             frontBtn.style.color = side === 'front' ? '#e2e8f0' : '#64748b';
             backBtn.style.background = side === 'back' ? '#1e293b' : 'transparent';
             backBtn.style.color = side === 'back' ? '#e2e8f0' : '#64748b';
+        }
+
+        function triggerDownload() {
+            const node = document.getElementById('exportTarget');
+            const btn = document.getElementById('downloadBtn');
+            const originalContent = btn.innerHTML;
+
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> GENERATING...';
+            btn.disabled = true;
+
+            const scale = 3; // 3x scale for high resolution (approx 1050x600)
+
+            htmlToImage.toPng(node, {
+                quality: 1.0,
+                pixelRatio: scale,
+                style: {
+                    transform: 'none', // Ensure no transforms messing up positioning
+                    boxShadow: 'none',
+                    margin: 0
+                }
+            })
+                .then(function (dataUrl) {
+                    const link = document.createElement('a');
+                    link.download = `AtlanticGate_${currentExportSide}_${inputs.name.value.replace(/\s+/g, '_')}.png`;
+                    link.href = dataUrl;
+                    link.click();
+
+                    btn.innerHTML = originalContent;
+                    btn.disabled = false;
+                })
+                .catch(function (error) {
+                    console.error('oops, something went wrong!', error);
+                    alert('Export failed. Please try again.');
+                    btn.innerHTML = originalContent;
+                    btn.disabled = false;
+                });
         }
 
         // Close on Escape key
